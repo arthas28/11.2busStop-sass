@@ -1,0 +1,132 @@
+
+
+//公交站牌宽度
+$stop-w: 250px;
+//盒模型设定类
+@mixin box-sizing($sizing){
+  -webkit-box-sizing: $sizing;
+  -moz-box-sizing: $sizing;
+  box-sizing: $sizing;
+}
+//div样式基本宽高设定类
+@mixin div-baseSize($width,$height,$margin){
+  width: $width;
+  height: $height;
+  margin: $margin;
+}
+//div样式详细设定类
+@mixin div-size($width,$height,$fontZise,$fontWeight,$textAlign,$color,$padding){
+  width: $width;
+  height: $height;
+  font-size: $fontZise;
+  font-weight: $fontWeight;
+  text-align: $textAlign;
+  color: $color;
+  padding: $padding;
+}
+
+ul,li{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+//div边框阴影设定类
+.div-shadow{
+  -webkit-box-shadow:5px 5px 5px rgba(0,0,0,.6);
+  -moz-box-shadow:5px 5px 5px rgba(0,0,0,.6);
+  box-shadow:5px 5px 5px rgba(0,0,0,.6);
+}
+//公交站牌样式布局
+.wrapper{
+  position: relative;
+  background: grey;
+  width: $stop-w;
+  margin: $stop-w/10 auto;
+  border: $stop-w/20 solid saddlebrown;
+  border-radius: $stop-w/20;
+  overflow: hidden;
+  @extend .div-shadow;
+  //每一块站牌wrapper__stop样式设置
+  .wrapper__stop{
+    position: relative;
+    padding: 0 2%;
+    float: left;
+    background: beige;
+    border: 1/50*$stop-w solid beige;
+    border-radius: 10%;
+    @include box-sizing(border-box);
+    @include div-baseSize(94%,1/3*92%,3%);
+    div{
+      width: 100%;
+      float: left;
+      @include box-sizing(border-box);
+    }
+    //公交站牌号和发车时间
+    .stop--header{
+      height: 2/7*100%;
+      overflow: hidden;
+      .stop--header__num{
+        @include div-size(50%,100%,4/25*$stop-w,bolder,inherit,black,2%);
+      }
+      .stop--header__notice{
+        width: 50%;
+        height: 1/5*$stop-w;
+        span{
+          float: left;
+          @include div-size(50%,50%,1/20*$stop-w,bolder,inherit, #0F68C1,5%);
+          @include box-sizing(border-box);
+        }
+      }
+    }
+    //公交车醒目标志
+    .stop--title{
+      background: red;
+      letter-spacing: 2/25*$stop-w;
+      @include div-size(100%,1/7*100%,1/15*$stop-w,bold,center,#ffffff,1%);
+    }
+    //公交站点
+    .stop--main{
+      height: 3/7*100%;
+      li{
+        float: left;
+        @include box-sizing(border-box);
+        @include div-size(10%,100%,1/25*$stop-w,bold,center,black,1%);
+        }
+      }
+      .stop--main__tip{
+        color: red !important;
+
+    }
+    //发车箭头方向
+    .stop--footer{
+      height: 1/7*100%;
+      div{
+        float: left;
+        vertical-align: bottom;
+        @include box-sizing(border-box);
+      }
+      .stop--footer__line1{
+        padding-top: 1/50*$stop-w;
+        border-bottom: $stop-w/50 solid green;
+        @include div-baseSize(40%,0,0);
+      }
+      .stop--footer__bus{
+        @include div-size(20%,100%,1/15*$stop-w,bolder,center,black,0);
+      }
+      .stop--footer__line2{
+        padding-top: 1/50*$stop-w;
+        border-bottom: $stop-w/50 solid green;
+        @include div-baseSize(20%,0,0);
+      }
+      //小三角
+      .stop--footer__arrow{
+        border-left: $stop-w/6 solid green;
+        border-top: $stop-w/25 solid transparent;
+        border-right: 0;
+        border-bottom: 0;
+        @include div-baseSize(20%,0,0);
+      }
+    }
+  }
+}
+
